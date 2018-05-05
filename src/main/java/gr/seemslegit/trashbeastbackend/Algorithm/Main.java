@@ -7,7 +7,7 @@ import java.util.Random;
 public class Main {
 
     public static long totalDistance;
-    public static long currentDistance=100;
+    public static long currentDistance = 100;
     public static long nextDistance;
 
     public static Node currentNode;
@@ -180,22 +180,19 @@ public class Main {
         currentNode = serres;
         nextNode = null;
 
-        for(int i=0; i<100; i++) {
-            while(nodesNotPassed.size()<10) {
+        for (int i = 0; i < 100; i++) {
+            while (nodesNotPassed.size() < 10) {
+                System.out.println(currentNode.getName());
                 nextNode = currentNode.getHood().get(random.nextInt(currentNode.getHood().size()));
                 nodesPassed.add(nextNode);
                 nodesNotPassed.remove(nextNode);
-                for(Node node: nodesPassed) {
-                    while(!nextNode.equals(node)) {
+                for (Node node : nodesPassed) {
+                    if (nextNode.equals(node)) {
                         currentNode = nextNode;
                     }
                 }
             }
         }
-
-
-        System.out.println();
-
     }
 }
 
