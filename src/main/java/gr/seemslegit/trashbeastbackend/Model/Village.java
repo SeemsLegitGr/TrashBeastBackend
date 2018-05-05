@@ -1,10 +1,6 @@
 package gr.seemslegit.trashbeastbackend.Model;
 
-import javax.annotation.Generated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Village {
@@ -16,6 +12,8 @@ public class Village {
     private String name;
     private Double latitude;
     private Double longitude;
+
+    private boolean visited = false;
 
     public Long getId() {
         return id;
@@ -47,5 +45,13 @@ public class Village {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 }

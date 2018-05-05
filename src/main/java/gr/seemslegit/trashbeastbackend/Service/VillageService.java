@@ -7,4 +7,5 @@ public interface VillageService {
 
     List<Village> getAllVillages();
     void addVillage(String name,Double latitude,Double longitude);
+    void findOptimal();
 }

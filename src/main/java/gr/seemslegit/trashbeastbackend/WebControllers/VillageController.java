@@ -29,4 +29,9 @@ public class VillageController {
         villageService.addVillage(name, latitude, longitude);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @RequestMapping(value ="/findOptimal")
+    public void findOptimal(){
+        villageService.findOptimal();
+    }
 }
