@@ -10,5 +10,7 @@ import java.util.List;
 public interface VillageRepository extends JpaRepository<Village, Long> {
 
 
+    Village findByName(String name);
     List<Village> findAll();
+    List<Village> findAllByVisited(boolean TRUE);
 }

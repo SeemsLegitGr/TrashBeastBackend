@@ -34,55 +34,76 @@ public class VillageServiceImpl implements VillageService {
 
 
     }
-    //REMOVE FROM HERE TILL THE END (of time)
+
     @Override
-    public void findOptimal(){
-        System.out.println();
+    public List<Village> findOptimal() {
         List<Village> villages;
-        List<Path> paths = pathRepository.findAll();
         villages = villageRepository.findAll();
-        float overallDistance = 0;
-        float dist = 99;
-        List<Village> route;
-
         Village currentVillage = villageRepository.getOne(1L);
-        List<Path> availablePaths = pathRepository.findByOrigin(currentVillage);
+        List<Village> optimalRoute = new ArrayList<>();
+        optimalRoute.add(currentVillage);
 
+        boolean flag = true;
 
-        for (Path path :
-                availablePaths) {
-            System.out.println(path.getOrigin().getName() + " > " + path.getDestination().getName() + " dist: " + path.getDistance());
+        while(flag){
+            int counter = 0;
+            List<Path> paths = pathRepository.findAll();
+            float overallDistance = 0;
+            float dist = 0;
+            List<Village> route;
+            List<Path> availablePaths = pathRepository.findByOrigin(currentVillage);
+            List<Village> visited = villageRepository.findAllByVisited(true);
 
-            if(path.getDistance() < dist)
-            {
-                dist = path.getDistance();
-                currentVillage = path.getDestination();
+            while (visited.size() != 10) {
+                Random rand = new Random();
+
+                int r = rand.nextInt(availablePaths.size()) + 0;
+                for (Path path :
+                        availablePaths) {
+                    if (path.getDestination().isVisited()) counter++;
+                }
+                if (counter >= availablePaths.size()) {
+                    currentVillage = availablePaths.get(r).getDestination();
+                    dist = availablePaths.get(r).getDistance();
+                }
+                else {
+                    for (Path path :
+                            availablePaths) {
+                        if (!path.getDestination().isVisited()) {
+                            if (path.getDistance() > dist) {
+                                dist = path.getDistance();
+                                currentVillage = path.getDestination();
+                            }
+                        }
+                    }
+                }
+                counter = 0;
+
+                overallDistance += dist;
+                dist = 0;
+                currentVillage.setVisited(true);
+                System.out.println(currentVillage.getName() + " with distance: " + overallDistance);
+
+                optimalRoute.add(currentVillage);
+
+                villageRepository.saveAndFlush(currentVillage);
+                visited.clear();
+                visited = villageRepository.findAllByVisited(true);
+                availablePaths.clear();
+                availablePaths = pathRepository.findByOrigin(currentVillage);
             }
-            overallDistance+= dist;
+            for (Village v :
+                    villages) {
+                v.setVisited(false);
+                villageRepository.saveAndFlush(v);
+            }
+            if(currentVillage == villageRepository.getOne(8L))
+                flag = false;
         }
-        System.out.println(currentVillage.getName() + " with distance: " + dist);
 
 
-            /*if(availablePaths.get(i).getDistance() < availablePaths.get(i+1).getDistance()){
-                dist = availablePaths.get(i).getDistance();
-                currentVillage = availablePaths.get(i).getDestination();
-                System.out.println(currentVillage.getName() + " " + dist);
-            }*/
-
-
-
-
-
-       /* for (Path path :
-                paths) {
-            for (Village village: villages){
-
-            }
-            System.out.println(path.getOrigin().getName()+ " > " + path.getDestination().getName() + "  Dist: " + path.getDistance());
-        }*/
-        
-        //System.out.println(villages.get(1).getName());
-        
-
+        return optimalRoute;
     }
+
 }
+
