@@ -2,17 +2,20 @@ package gr.seemslegit.trashbeastbackend.Algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Main {
 
     public static long totalDistance;
-    public static long currentDistance;
-    public static long nextDistance = 100;
+    public static long currentDistance=100;
+    public static long nextDistance;
 
     public static Node currentNode;
     public static Node nextNode;
 
     public static void main(String[] args) {
+
+        Random random = new Random();
 
         //set Nodes
         Node serres = new Node("Serres");
@@ -177,24 +180,22 @@ public class Main {
         currentNode = serres;
         nextNode = null;
 
-
-        while (nodesPassed.size() < 10) {
-            for (Node node : currentNode.getHood()) {
-                for (Path path : node.getPaths()) {
-                    currentDistance = path.getDistance();
-                    if (currentDistance < nextDistance) {
-                        nextDistance = currentDistance;
+        for(int i=0; i<100; i++) {
+            while(nodesNotPassed.size()<10) {
+                nextNode = currentNode.getHood().get(random.nextInt(currentNode.getHood().size()));
+                nodesPassed.add(nextNode);
+                nodesNotPassed.remove(nextNode);
+                for(Node node: nodesPassed) {
+                    while(!nextNode.equals(node)) {
                         currentNode = nextNode;
                     }
                 }
-
             }
         }
 
 
-        for (Node node : nodesNotPassed) {
+        System.out.println();
 
-        }
     }
 }
 
