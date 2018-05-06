@@ -46,13 +46,15 @@ public class VillageServiceImpl implements VillageService {
         boolean flag = true;
 
         while(flag){
+            int step =1;
             int counter = 0;
             float overallDistance = 0;
             float dist = 0;
             List<Village> route;
             List<Path> availablePaths = pathRepository.findByOrigin(currentVillage);
             List<Village> visited = villageRepository.findAllByVisited(true);
-
+            System.out.println();
+            System.out.println();
             while (visited.size() != 10) {
                 Random rand = new Random();
 
@@ -81,7 +83,7 @@ public class VillageServiceImpl implements VillageService {
                 overallDistance += dist;
                 dist = 0;
                 currentVillage.setVisited(true);
-                System.out.println(currentVillage.getName() + " with distance: " + overallDistance);
+                System.out.println(step + ": "+currentVillage.getName() + " with distance: " + overallDistance);
 
                 optimalRoute.add(currentVillage);
 
@@ -90,14 +92,18 @@ public class VillageServiceImpl implements VillageService {
                 visited = villageRepository.findAllByVisited(true);
                 availablePaths.clear();
                 availablePaths = pathRepository.findByOrigin(currentVillage);
+                step++;
             }
             for (Village v :
                     villages) {
                 v.setVisited(false);
                 villageRepository.saveAndFlush(v);
             }
-            if(currentVillage == villageRepository.getOne(8L))
+            if(currentVillage == villageRepository.getOne(8L)){
                 flag = false;
+            }
+
+
         }
 
 

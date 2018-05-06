@@ -75,6 +75,11 @@ public class ReadServiceImpl implements ReadService {
             path.setOrigin(o);
             path.setDistance(dis);
             pathRepository.save(path);
+            Path path2 = new Path();
+            path2.setDestination(o);
+            path2.setOrigin(d);
+            path2.setDistance(dis);
+            pathRepository.save(path2);
         }
     }
 }
