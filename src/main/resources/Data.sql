@@ -1,4 +1,4 @@
-INSERT INTO VILLAGE (name, latitude, longitude, visited) VALUES ('Serres', 41.092083, 23.541016, TRUE);
+INSERT INTO VILLAGE (name, latitude, longitude, visited) VALUES ('Serres', 41.092083, 23.541016, FALSE);
 INSERT INTO VILLAGE (name, latitude, longitude, visited) VALUES ('Provatas', 41.068238, 23.390686, FALSE);
 INSERT INTO VILLAGE (name, latitude, longitude, visited) VALUES ('A. Kamila',  	41.058320, 23.424134, FALSE);
 INSERT INTO VILLAGE (name, latitude, longitude, visited) VALUES ('K. Kamila', 41.020431, 23.483293, FALSE);

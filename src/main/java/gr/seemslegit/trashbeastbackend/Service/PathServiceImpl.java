@@ -3,8 +3,8 @@ package gr.seemslegit.trashbeastbackend.Service;
 import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directions.v5.MapboxDirections;
 import com.mapbox.services.commons.models.Position;
-import gr.seemslegit.trashbeastbackend.Model.Village;
-import gr.seemslegit.trashbeastbackend.Repository.VillageRepository;
+import gr.seemslegit.trashbeastbackend.Model.Path;
+import gr.seemslegit.trashbeastbackend.Repository.PathRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +14,23 @@ import java.util.List;
 public class PathServiceImpl implements PathsService {
 
     @Autowired
-    VillageRepository villageRepository;
+    PathRepository pathRepository;
 
     @Override
     public void calculateDistances(){
-        List<Village> villageList= villageRepository.findAll();
+        List<Path> paths= pathRepository.findAll();
 
-        MapboxDirections client = new MapboxDirections.Builder()
-                .setAccessToken("pk.eyJ1Ijoia3Jpc2ltZW4iLCJhIjoiY2o4c2xlNmEzMDk2azMycjBqM3J0ZXdsMCJ9.O6RwR4phSWHd1cznwDGixg")
-                                .setOrigin(Position.fromCoordinates(-122.416667, 37.783333))
-                                .setDestination(Position.fromCoordinates(-121.9, 37.333333))
-                                .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-                                .build();
+        for (Path path :
+                paths) {
+            MapboxDirections client = new MapboxDirections.Builder()
+                    .setAccessToken("pk.eyJ1Ijoia3Jpc2ltZW4iLCJhIjoiY2o4c2xlNmEzMDk2azMycjBqM3J0ZXdsMCJ9.O6RwR4phSWHd1cznwDGixg")
+                    .setOrigin(Position.fromCoordinates(path.getOrigin().getLongitude(), path.getOrigin().getLatitude()))
+                    .setDestination(Position.fromCoordinates(path.getDestination().getLongitude(), path.getDestination().getLatitude()))
+                    .setProfile(DirectionsCriteria.PROFILE_DRIVING)
+                    .build();
+
+
+        }
+
     }
 }

@@ -47,7 +47,6 @@ public class VillageServiceImpl implements VillageService {
 
         while(flag){
             int counter = 0;
-            List<Path> paths = pathRepository.findAll();
             float overallDistance = 0;
             float dist = 0;
             List<Village> route;
@@ -104,6 +103,8 @@ public class VillageServiceImpl implements VillageService {
 
         return optimalRoute;
     }
+
+
 
 }
 

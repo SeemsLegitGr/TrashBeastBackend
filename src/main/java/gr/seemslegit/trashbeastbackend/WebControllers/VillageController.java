@@ -31,7 +31,7 @@ public class VillageController {
     }
 
     @RequestMapping(value ="/findOptimal")
-    public void findOptimal(){
-        villageService.findOptimal();
+    public List<Village> findOptimal(){
+        return villageService.findOptimal();
     }
 }
