@@ -18,6 +18,9 @@ Spring Boot
 None...... yet.
 
 ## Live demo
+![altText](GIF1-1.gif)
+![altText](GIF1.gif)
+![altText](gif74.gif)
 
 ## License
 
