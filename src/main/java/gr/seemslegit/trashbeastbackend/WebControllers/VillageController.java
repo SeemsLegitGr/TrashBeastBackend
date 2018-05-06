@@ -1,5 +1,7 @@
 package gr.seemslegit.trashbeastbackend.WebControllers;
 
+import java.util.List;
+
 import gr.seemslegit.trashbeastbackend.Model.Village;
 import gr.seemslegit.trashbeastbackend.Service.VillageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 public class VillageController {
 
@@ -18,20 +18,20 @@ public class VillageController {
     private VillageService villageService;
 
     @RequestMapping(value = "/getAllVillages")
-    public List<Village> getVillages(){
+    public List<Village> getVillages() {
         return villageService.getAllVillages();
     }
 
-    @RequestMapping(value ="/addVillage")
-    public ResponseEntity<?> addVillage(@RequestParam(value="name") String name,
+    @RequestMapping(value = "/addVillage")
+    public ResponseEntity<?> addVillage(@RequestParam(value = "name") String name,
                                         @RequestParam(value = "lat") Double latitude,
                                         @RequestParam(value = "lon") Double longitude) {
         villageService.addVillage(name, latitude, longitude);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @RequestMapping(value ="/findOptimal")
-    public void findOptimal(){
+    @RequestMapping(value = "/findOptimal")
+    public void findOptimal() {
         villageService.findOptimal();
     }
 }

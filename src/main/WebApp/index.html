@@ -5,7 +5,7 @@
     <title>TrashBeast Manager</title>
 </head>
 <body>
-<h2> TBI</h2>
+<h2>TBI</h2>
 
 <form action="/addVillage" method="post">
     Village Name: <input type="text" name="name"><br>
@@ -13,5 +13,11 @@
     Longitude: <input type="text" name="lon"><br>
     <input type="submit" value="Submit">
 </form>
+<br><br><br><br>
+<form action="/readFile" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" id="file">
+    <input type="submit" value="Submit">
+</form>
+
 </body>
 </html>

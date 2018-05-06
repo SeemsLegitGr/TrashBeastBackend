@@ -1,7 +1,6 @@
 package gr.seemslegit.trashbeastbackend.Service;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.util.List;
 import java.util.Scanner;
 
 import gr.seemslegit.trashbeastbackend.Model.Path;
@@ -26,59 +25,56 @@ public class ReadServiceImpl implements ReadService {
     }
 
     @Override
-    public void parseFile(String filename) {
+    public void parseFile(List<String> filename) {
         String origin, destination, distance, originName,
                 originCoords, destinationName, destinationCoords, distanceName, distKMeters;
         double originLat, originLon, destinationLat, destinationLon, distanceKMeters;
 
-        try {
-            String currentLine;
-            BufferedReader br = new BufferedReader(new FileReader(filename));
-            while ((currentLine = br.readLine()) != null) {
-                Scanner read, split;
-                split = new Scanner(currentLine);
+        String currentLine;
+        for (String s : filename) {
 
-                split.useDelimiter(";");
+            Scanner read, split;
 
-                origin = split.next();
-                destination = split.next();
-                distance = split.next();
+            split = new Scanner(s);
 
-                read = new Scanner(origin).useDelimiter(":");
-                originName = read.next();
-                originName = originName.split("[\"]")[1];
-                originCoords = read.next();
-                String[] helper = originCoords.split(",");
-                originLat = Double.parseDouble(helper[0]);
-                originLon = Double.parseDouble(helper[1]);
+            split.useDelimiter(";");
 
-                read = new Scanner(destination).useDelimiter(":");
-                destinationName = read.next();
-                destinationName = destinationName.split("[\"]")[1];
-                destinationCoords = read.next();
-                helper = originCoords.split(",");
-                destinationLat = Double.parseDouble(helper[0]);
-                destinationLon = Double.parseDouble(helper[1]);
+            origin = split.next();
+            destination = split.next();
+            distance = split.next();
 
-                read = new Scanner(distance).useDelimiter(":");
-                distanceName = read.next();
-                distanceName = distanceName.split("[\"]")[1];
-                distKMeters = read.next();
-                float dis = Float.parseFloat(distKMeters);
+            read = new Scanner(origin).useDelimiter(":");
+            originName = read.next();
+            originName = originName.split("[\"]")[1];
+            originCoords = read.next();
+            String[] helper = originCoords.split(",");
+            originLat = Double.parseDouble(helper[0]);
+            originLon = Double.parseDouble(helper[1]);
 
-                split.close();
+            read = new Scanner(destination).useDelimiter(":");
+            destinationName = read.next();
+            destinationName = destinationName.split("[\"]")[1];
+            destinationCoords = read.next();
+            helper = originCoords.split(",");
+            destinationLat = Double.parseDouble(helper[0]);
+            destinationLon = Double.parseDouble(helper[1]);
 
-                Village o = villageRepository.findByName(originName);
-                Village d = villageRepository.findByName(destinationName);
+            read = new Scanner(distance).useDelimiter(":");
+            distanceName = read.next();
+            distanceName = distanceName.split("[\"]")[1];
+            distKMeters = read.next();
+            float dis = Float.parseFloat(distKMeters);
 
-                Path path = new Path();
-                path.setDestination(d);
-                path.setOrigin(o);
-                path.setDistance(dis);
-                pathRepository.save(path);
-            }
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
+            split.close();
+
+            Village o = villageRepository.findByName(originName);
+            Village d = villageRepository.findByName(destinationName);
+
+            Path path = new Path();
+            path.setDestination(d);
+            path.setOrigin(o);
+            path.setDistance(dis);
+            pathRepository.save(path);
         }
     }
 }
