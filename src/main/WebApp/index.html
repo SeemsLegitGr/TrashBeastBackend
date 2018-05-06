@@ -2,13 +2,8 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width = device-width, initial-scale =1">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
-    <script src="populateDropdown.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>TrashBeast Manager</title>
 
@@ -40,9 +35,9 @@
                     <label>Longitude</label>
                     <input type="text" class="form-control" name="lon">
                 </div>
-                <p> Ή επιλέξτε τοποθεσία απο τον χάρτη <a class="btn btn-primary btn-lg"><span class="glyphicons glyphicons-map"></span></a></p>
-                <button type="submit" class="btn btn-primary btn-lg"><span
-                        class="glyphicon glyphicon-ok"></span> Καταχώρηση
+                <p> Ή επιλέξτε τοποθεσία απο τον χάρτη <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-map"></i>
+                </button></p>
+                <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-check-circle"></i> Καταχώρηση
                 </button>
             </form>
         </div>
@@ -61,7 +56,9 @@
                     <button type="button" class="btn btn-primary">Ag. Eleni</button>
                     <button type="button" class="btn btn-primary">Peponia</button>
                 </div>
-                <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1 glyphicons glyphicons-direction"></span>
+                <div style="font-size:9em;">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
                 <div class="btn-group-vertical menulist2 col-lg-5 col-md-5 col-sm-5 col-xs-5">
                     <button type="button" class="btn btn-primary">Serres</button>
                     <button type="button" class="btn btn-primary">Provatas</button>
@@ -76,8 +73,7 @@
                 </div>
             </div>
             <div class="row">
-                <button type="submit" class="btn btn-primary btn-lg col-lg-5 col-md-5 col-sm-5 col-xs-5"><span
-                        class="glyphicon glyphicon-ok"></span> Υπολογισμός και καταχώρηση
+                <button style="margin-top: 1.5em;" type="submit" class="btn btn-primary btn-lg col-lg-5 col-md-5 col-sm-5 col-xs-5"><i class="fas fa-check-circle"></i>  Υπολογισμός και καταχώρηση
                 </button>
             </div>
         </div>
